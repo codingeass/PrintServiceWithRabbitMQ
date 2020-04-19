@@ -13,22 +13,18 @@ To demonstrate this created three services:
 | printService      | 8082     |
 | appService |   8083 |
 
-## eurekaService
-
+#### eurekaService
 This service uses Netflix Eureka to create a discovery server. Other services printService and appService are registered to this service using the service name given in the application.yml file. Once registered to this service eureka server will act as load balancer and also help service to connect to other service by just knowing there service name.
 
-## printService
-
+#### printService
 Print Service uses Netflix Eureka Client to register to the eureka server (eurekaService) by giving the details of the eureka server address in its application.yml file. \
 This service uses Rabbit MQ to receive message from other services which it can print to the PDF or someplace else. Here printService receives message from the the appService and prints message to the log file.
 
-## appService
-
+#### appService
 App Service uses Netflix Eureka Client to register to the eureka server (eurakaService) by giving the details of the eureka server address in its application.yml file. \
 This a dummy service which uses Rabbit MQ to send message to printService through the message queue.
 
-## Execute above program
-
+#### Execute above program
 Make sure all the ports mentioned above against each of the services are free, if not you can assign different port in the application.yml. If you change the port of the Eureka Server, we need to mention this in defaultZone of other services application.yml file.\
 RabbitMQ username and password used here is 'guest' configured in yml file. This will be the default password when you install RabbitMQ first time in your system (Try at the url - http://localhost:15672/). By default, RabbitMQ will listen on port 5672 on all available interfaces and this value is placed at spring.cloud.stream.binders.local_rabbit.environment.spring.rabbitmq.port.\
 
